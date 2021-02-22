@@ -56,25 +56,39 @@ class Match {
     }
     
      calculateMatchWinner(){
-         const radiantWinAvg = this.calculateTeamWinAvg(this.radiantTeamInstance)
-         const direWinAvg = this.calculateTeamWinAvg(this.direTeamInstance)
+        const radiantWinAvg = this.calculateTeamWinAvg(this.radiantTeamInstance)
+        const direWinAvg = this.calculateTeamWinAvg(this.direTeamInstance)
         if (radiantWinAvg > direWinAvg){
+            
             this.winner = "Radiant"
             const delta = radiantWinAvg - direWinAvg
-            this.winnerProbability = (delta/.07)  //or 'liklihood'
+            this.winnerProbability = (delta/.07)  
             
         } else if (direWinAvg > radiantWinAvg){
             this.winner = "Dire"
             const delta =  direWinAvg - radiantWinAvg
-            this.winnerProbability = (delta/.07)  //or 'liklihood'
+            this.winnerProbability = (delta/.07)  
         } else {
             this.winner = "Tie"
         }
+        let winnerCol = document.getElementById(this.winner)
+        winnerCol.style["border"] = "5px solid yellow"
+        winnerCol.style["animation-name"] = "winnerBox"
+        winnerCol.style["animation-duration"] = "2s"
+        winnerCol.style["animation-iteration-count"] = "infinite"
+        winnerCol.style["animation-direction"] = "alternate"
+        winnerCol.style["animation-timing-function"] = "linear"
         this.appendWinner(this.winner,this.winnerProbability)
     }
+    
+    // static applyWinnerStyle(winnerCol) {
+        
+
+    // }
  
 
     appendWinner(winnerArg,winProbArg){
+        // Match.applyWinnerStyle(winnerArg)
         let winSpan = document.createElement('span')
         winSpan.className = "winnerSpan"
         winSpan.innerHTML = 
