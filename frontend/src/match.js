@@ -15,6 +15,7 @@ class Match {
         Match.clearHeroList("radiantListID");
         Match.clearHeroList("direListID");
         Match.clearWinners();
+        Match.clearWinnerStyle();
 
         apiService.getHeros().then(herosResp => { 
             let allHeros = []
@@ -84,6 +85,24 @@ class Match {
         winnerCol.style["animation-direction"] = "alternate"
         winnerCol.style["animation-timing-function"] = "linear"
     }
+
+    static clearWinnerStyle() {
+        let winnerCol = document.getElementById("Dire")
+        winnerCol.style["border"] = ""
+        winnerCol.style["animation-name"] = ""
+        winnerCol.style["animation-duration"] = ""
+        winnerCol.style["animation-iteration-count"] = ""
+        winnerCol.style["animation-direction"] = ""
+        winnerCol.style["animation-timing-function"] = ""
+
+        winnerCol = document.getElementById("Radiant")
+        winnerCol.style["border"] = ""
+        winnerCol.style["animation-name"] = ""
+        winnerCol.style["animation-duration"] = ""
+        winnerCol.style["animation-iteration-count"] = ""
+        winnerCol.style["animation-direction"] = ""
+        winnerCol.style["animation-timing-function"] = ""
+    }
  
 
     appendWinner(winnerArg,winProbArg){
@@ -110,7 +129,7 @@ class Match {
         newli.innerHTML = 
         `<div class="heroLiSpan">
             <span class="heroImage">
-                <img src="http://cdn.dota2.com/apps/dota2/images/heroes/${hero.name.toLowerCase()}_full.png" style="width:80px;height:45px;"></img>
+                <img src="http://cdn.dota2.com/apps/dota2/images/heroes/${hero.name.toLowerCase()}_full.png" style="width:80px;height:45px;" onerror="this.onerror=null; this.src='assets/shrug.jpeg'"></img>
             </span>
             <span class="heroNameSpan">
                 ${hero.name}
@@ -147,9 +166,4 @@ class Match {
         let containDiv = document.getElementById("containerWinner");
         while(containDiv.firstChild) containDiv.removeChild(containDiv.firstChild);
     }
-
-
-
-
-
-}   //ends class
+} 
